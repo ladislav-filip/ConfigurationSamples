@@ -23,6 +23,6 @@ public class SubWorkerOptMonitor
 
     public void Run()
     {
-        _logger.LogInformation("SubWorkerOptMonitor settings is {Text}", _opt.CurrentValue.MyTextValue);
+        _logger.LogInformation("IOptionsMonitor settings is {Text}", _opt.CurrentValue.MyTextValue);
     }
 }

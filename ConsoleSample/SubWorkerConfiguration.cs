@@ -21,6 +21,6 @@ public class SubWorkerConfiguration
 
     public void Run()
     {
-        _logger.LogInformation("SubWorkerConfiguration settings is {Text}", _configuration.GetValue<string>("my:MyTextValue"));
+        _logger.LogInformation("IConfiguration settings is {Text}", _configuration.GetValue<string>("my:MyTextValue"));
     }
 }

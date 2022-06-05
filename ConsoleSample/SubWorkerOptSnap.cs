@@ -14,15 +14,16 @@ public class SubWorkerOptSnap
 {
     private readonly IOptionsSnapshot<MySetting> _opt;
     private readonly ILogger<SubWorkerOptSnap> _logger;
+    private readonly string _id = Guid.NewGuid().ToString();
 
     public SubWorkerOptSnap(IOptionsSnapshot<MySetting> opt, ILogger<SubWorkerOptSnap> logger)
     {
         _opt = opt;
         _logger = logger;
     }
-
-    public void Run()
+    
+    public void Run(string ident = "")
     {
-        _logger.LogInformation("SubWorkerOptSnap settings is {Text}", _opt.Value.MyTextValue);
+        _logger.LogInformation(ident + "IOptionsSnapshot [{Id}] settings is {Text}", _id, _opt.Value.MyTextValue);
     }
 }

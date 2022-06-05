@@ -21,6 +21,6 @@ public class SubWorkerOpt
 
     public void Run()
     {
-        _logger.LogInformation("SubWorkerOpt settings is {Text}", _opt.Value.MyTextValue);
+        _logger.LogInformation("IOptions settings is {Text}", _opt.Value.MyTextValue);
     }
 }
