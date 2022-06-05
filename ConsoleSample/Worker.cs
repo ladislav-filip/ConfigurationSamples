@@ -19,8 +19,10 @@ public class Worker
     {
         do
         {
+            _logger.LogDebug("...run loop...\r\n");
             _logger.LogInformation("---\r\n");
-            
+            _logger.LogWarning("######\r\n");
+
             // standardní IOptions, nedokáže detekovat změny
             var sub = Helper.Provider.GetRequiredService<SubWorkerOpt>();
             sub.Run();

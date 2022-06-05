@@ -1,15 +1,25 @@
 using ApiSample;
+using Serilog;
+using Serilog.Events;
+
+Helper.LogLevel.MinimumLevel = LogEventLevel.Warning;
+
+var configuration = new ConfigurationBuilder()
+    .CustomConf()
+    .Build();
 
 var builder = WebApplication.CreateBuilder(args);
 
+Log.Logger = new LoggerConfiguration()
+    // .MinimumLevel.ControlledBy(Helper.LogLevel)
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
+
 builder.Host
+    .UseSerilog()
     .ConfigureAppConfiguration(conf =>
     {
-        conf.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json", false, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true, reloadOnChange: true)
-            .AddJsonFile("appsettings.local.json", true)
-            .AddEnvironmentVariables();
+        conf.CustomConf();
     });
 
 // Add services to the container.

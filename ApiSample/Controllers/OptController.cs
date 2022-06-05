@@ -37,10 +37,15 @@ public class OptController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
+        _logger.LogDebug("Start request...");
+        _logger.LogInformation("Start request...");
+        _logger.LogWarning("Start request...");
         var result = $"Monitor: value = {_optMonitor.CurrentValue.MyTextValue}\r\n";
         result += $"Snap: value = {_optSnap.Value.MyTextValue}\r\n";
         result += $"Opt: value = {_opt.Value.MyTextValue}\r\n";
         result += "Configuration: value = " + _configuration.GetValue<string>("my:MyTextValue");
+        
+        // Helper.LogLevel.MinimumLevel = LogEventLevel.Warning;
         
         return Ok(result);
     }

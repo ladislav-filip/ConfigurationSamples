@@ -4,10 +4,10 @@ using Serilog;
 var configuration = new ConfigurationBuilder()
     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
     .AddJsonFile("appsettings.json", false, reloadOnChange: true)
+    .AddSystemsManager("/samples", reloadAfter: TimeSpan.FromSeconds(30))
     .Build();
 
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
     .CreateLogger();
 
 var services = new ServiceCollection();
@@ -23,9 +23,9 @@ services.AddTransient<SubWorkerOptMonitor>();
 services.AddTransient<SubWorkerConfiguration>();
 services.AddLogging(conf =>
 {
-    conf.AddSerilog(dispose: true);
-    // conf.AddConfiguration(configuration);
-    // conf.AddConsole();
+    // nuget Serilog.Settings.Reloader zajistí reload konfigurace
+    conf.AddSerilog(SwitchableLogger.Instance, true)
+        .AddSerilogConfigurationLoader(configuration, SwitchableLogger.Instance);
 });
 
 var serviceProvider = services.BuildServiceProvider();
