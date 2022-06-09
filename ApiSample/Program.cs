@@ -5,7 +5,7 @@ using Serilog.Events;
 Helper.LogLevel.MinimumLevel = LogEventLevel.Warning;
 
 var configuration = new ConfigurationBuilder()
-    .CustomConf()
+    // .CustomConf()
     .Build();
 
 var builder = WebApplication.CreateBuilder(args);
