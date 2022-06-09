@@ -26,27 +26,6 @@ public class Worker
             // standardní IOptions, nedokáže detekovat změny
             var sub = Helper.Provider.GetRequiredService<SubWorkerOpt>();
             sub.Run();
-            
-            // IOptionsSnapshot - detekuje změny, ale pouze v rámci lifestyle Scopped, takže zde je to stéjné jako IOptions
-            var subSnap = Helper.Provider.GetRequiredService<SubWorkerOptSnap>();
-            subSnap.Run();
-            
-            // IOptionsMonitor - detekuje změny vždy, je to řešené jako singleton
-            var subMon = Helper.Provider.GetRequiredService<SubWorkerOptMonitor>();
-            subMon.Run();
-            
-            // IConfiguration - detekuje změny vždy
-            var subConf = Helper.Provider.GetRequiredService<SubWorkerConfiguration>();
-            subConf.Run();
-
-            // IOptionsSnapshot - v hlavním vlákně a s vytvořením nového "scope"
-            SubSnapStart(asThread: false);
-            
-            // IOptionsSnapshot - ve vedlejším vlákně a be nového "scope"
-            SubSnapStart(asThread: true, createScope: false);
-            
-            // IOptionsSnapshot - ve vedlejším vlákně a s vytvořením nového "scope"
-            SubSnapStart(asThread: true);
 
             Thread.Sleep(5000);
         } while (true);

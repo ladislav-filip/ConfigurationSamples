@@ -9,4 +9,8 @@ namespace ConsoleSample;
 public class MySetting
 {
     public string MyTextValue { get; set; }
+
+    public int MaxValue { get; set; }
+
+    public string[] MyArray { get; set; }
 }
