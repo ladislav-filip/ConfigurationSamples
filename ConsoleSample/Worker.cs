@@ -26,6 +26,7 @@ public class Worker
             _logger.LogWarning("######\r\n");
 
             _logger.LogInformation("HODNOTA = {Hodnota}", _configuration.GetValue<string>("HODNOTA"));
+            _logger.LogInformation("ENV_HODNOTA = {Hodnota}", _configuration.GetValue<string>("ENV_HODNOTA"));
 
             Thread.Sleep(5000);
         } while (true);

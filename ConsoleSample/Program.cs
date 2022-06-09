@@ -1,10 +1,13 @@
 ﻿using ConsoleSample;
 using Serilog;
 
+
 var configuration = new ConfigurationBuilder()
     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+    // .AddEnvironmentVariables()
     .AddJsonFile("appsettings.json")
-    .AddIniFile("conf.ini")
+    // .AddIniFile("conf.ini")
+    // .AddCommandLine( args)
     .Build();
 
 Log.Logger = new LoggerConfiguration()
@@ -15,6 +18,7 @@ var services = new ServiceCollection();
 services.Configure<MySetting>(configuration.GetSection("my"));
 
 services.AddSingleton<Worker>();
+services.AddSingleton<IConfiguration>(configuration);
 
 services.AddLogging(conf =>
 {
