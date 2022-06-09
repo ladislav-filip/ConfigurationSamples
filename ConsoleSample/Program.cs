@@ -3,8 +3,8 @@ using Serilog;
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-    .AddJsonFile("appsettings.json", false, reloadOnChange: true)
-    .AddSystemsManager("/samples", reloadAfter: TimeSpan.FromSeconds(30))
+    .AddJsonFile("appsettings.json")
+    .AddIniFile("conf.ini")
     .Build();
 
 Log.Logger = new LoggerConfiguration()
@@ -15,12 +15,7 @@ var services = new ServiceCollection();
 services.Configure<MySetting>(configuration.GetSection("my"));
 
 services.AddSingleton<Worker>();
-services.AddSingleton<IConfiguration>(configuration);
-services.AddTransient<SubWorkerOpt>();
-services.AddTransient<SubWorkerOptSnap>();
 
-services.AddTransient<SubWorkerOptMonitor>();
-services.AddTransient<SubWorkerConfiguration>();
 services.AddLogging(conf =>
 {
     // nuget Serilog.Settings.Reloader zajistí reload konfigurace
