@@ -4,7 +4,7 @@ using Serilog;
 var configuration = new ConfigurationBuilder()
     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
     .AddJsonFile("appsettings.json", false, reloadOnChange: true)
-    .AddSystemsManager("/samples", reloadAfter: TimeSpan.FromSeconds(30))
+    // .AddSystemsManager("/samples", reloadAfter: TimeSpan.FromSeconds(30))
     .Build();
 
 Log.Logger = new LoggerConfiguration()
